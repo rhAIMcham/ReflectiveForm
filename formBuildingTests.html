@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<head>
+<style>
+body {
+  font-family: sans-serif;
+  background-color: #F1EEDE;
+}
+
+.checkContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+li {
+  list-style: none;
+  padding: 5px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #AF4510;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #4353A3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #4353A3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+fieldset {
+  width: fit-content;
+}
+</style>
+</head>
+<body>
+<form name="Rate your stress" onsubmit="return false" onchange="calculate(this)">
+ <fieldset>
+  <legend>Rate your stress</legend>
+  <p>Read the following statements and indicate whether you agree or disagree:</p>
+   <div class="formContainer">
+  <!--Check 1-->
+     <div class="checkContainer">
+     <p label="question1">I find myself less eager to go back to work or to resume my chores after a weekend
+      <label class="switch">
+        <input
+          type="checkbox"
+          role="switch"
+          name=one>
+       <span class="slider round"></span></label></p></div>
+  <!--Check 2-->
+   <div class="checkContainer">
+   <p>I find myself less eager to go back to work or to resume my chores after a weekend
+     <label class="switch">
+        <input 
+          type="checkbox"
+          role="switch"
+          name=two>
+       <span class="slider round"></span></label></p></div>
+  <!--Check 3-->
+   <div class="checkContainer">
+   <p>I find myself less eager to go back to work or to resume my chores after a weekend
+     <label class="switch">
+        <input 
+        type="checkbox"
+        role="switch"
+        name=three>
+       <span class="slider round"></span></label></p></div>
+  <!--Check 4-->
+   <div class="checkContainer">
+   <p>I find myself less eager to go back to work or to resume my chores after a weekend
+     <label class="switch">
+        <input
+        type="checkbox"
+        role="switch"
+        name=four>
+       <span class="slider round"></span></label></p></div>
+  <!--Check 5-->
+   <div class="checkContainer">
+   <p>I find myself less eager to go back to work or to resume my chores after a weekend
+     <label class="switch">
+        <input
+        type="checkbox"
+        role="switch"
+        name=five>
+       <span class="slider round"></span></label></p></div>
+   </div>
+  <p>Total:<output name=result id="numericalResult"></output></p>
+ </fieldset>
+ <script>
+  calculate(document.forms.pricecalc);
+ </script>
+</form>
+<button onclick="show()">Results</button>
+<p id="results"></p>
+</body>
+<script>
+function calculate(form) {
+   var price = 0;
+   if (form.elements.one.checked)
+     price += 1;
+   if (form.elements.two.checked)
+     price += 1;
+   if (form.elements.three.checked)
+     price += 1;
+   if (form.elements.four.checked)
+     price += 1;
+   if (form.elements.five.checked)
+     price += 1;
+   form.elements.result.value = price;
+ }
+
+ function show() {
+  var x = Number(document.getElementById("numericalResult").value);
+  var y = document.getElementById("results");
+  console.log(x);
+  if (x === 1 || x === 2) {
+     y.innerHTML = 'less than or equal to 2';
+  } else if (x === 3) {
+    y.innerHTML = 'result is 3';
+  } else if (x === 4) {
+    y.innerHTML = 'result is 4';
+  } else { (x === 5) 
+    y.innerHTML = 'result is 5';
+  }
+}
+ //TODO: refactor to use switch? with range declared elsewhere
+</script>
+</html>
+
